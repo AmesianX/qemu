@@ -804,6 +804,7 @@ static CCPrepare gen_prepare_eflags_c(DisasContext *s, TCGv reg)
     TCGv t0, t1;
     int size, shift;
 
+    s->cc_op = CC_OP_DYNAMIC;
     switch (s->cc_op) {
     case CC_OP_SUBB ... CC_OP_SUBQ:
         /* (DATA_TYPE)CC_SRCT < (DATA_TYPE)CC_SRC */
@@ -2228,7 +2229,7 @@ static inline void gen_jcc(DisasContext *s, int b,
 {
     TCGLabel *l1, *l2;
 
-    if (s->jmp_opt) {
+    if (0 && s->jmp_opt) {
         l1 = gen_new_label();
         gen_jcc1(s, b, l1);
 
